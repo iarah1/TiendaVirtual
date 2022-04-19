@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
+    @section scripts{
+        @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+    }
+
+    <style>
+        body {
+            background-color: #ffe1c9;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="">
+       <center><img src="~/Image/logo.png" height="150" /></center>
+    </div>
+
+
+    <nav class="navbar navbar-expand-sm bg-light navbar-light">
+
+        <!-- Links -->
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="/Home/Index">Inicio</a>
+            </li>
+
+            <!-- Dropdown -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                    Tienda
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/Home/Products?page=1&cat=1">Alimentos</a>
+                    <a class="dropdown-item" href="/Home/Products?page=1&cat=2">Suplementos</a>
+                    <a class="dropdown-item" href="/Home/Products?page=1&cat=3">Bebidas</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/Home/Contact">Contáctanos</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="content">
+        @RenderBody()
+    </div>
+
+    <footer class ="pie">
+        <p>DAS - Ciclo 01-2022 ©</p>
+    </footer>
+
+        @RenderSection("scripts", required: false)
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $.ajax({
+                    type: 'GET',
+                    url: '/Home/GetCategorias',
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    success: function (msg) {
+                        console.log(msg);
+                        $(".class").append("<p><a href='http://www.google.com'>Google</a></p>");
+
+                    },
+                    error: function (msg) { }
+                });
+
+
+            });
+
+        </script>
+
+    <style>
+        .pie {
+            text-align: center;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            padding: 20px 10px 5px 10px;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+
+</body>
+</html>

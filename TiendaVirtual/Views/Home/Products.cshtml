@@ -1,0 +1,69 @@
+﻿
+@{
+    var products = new List<TiendaVirtual.Models.Product>();
+    products = (List<TiendaVirtual.Models.Product>)ViewBag.Products;
+
+    int total_products = products.Count;
+
+    int currentPage = Convert.ToInt32(Session["CurrentPage"]);
+    int nextPage = (currentPage + 1);
+    int previousPage = (currentPage - 1);
+}
+
+<div class="row">
+    @{
+
+        string card_group = "<div class='card-group mt-1'>";
+        string end_group = "</div>";
+
+        int limit = 1;
+        int total = 1;
+        foreach (var p in products)
+        {
+            if (limit == 1)
+            {
+                @Html.Raw(card_group);
+            }
+
+            <div class="card">
+                <img class="card-img-top image-catalog" src="@p.ImageUrl" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">@p.ProductName</h5><div class="row d-flex justify-content-center">
+                        <div class="col-sm-8">
+                            <div class="input-group">
+
+                                <div class="badge bg-primary fs-5 text-center" style="width: 6rem;">
+                                    $ @p.Price
+                                </div>
+
+                                <input type="number" id="qty-product-@p.ProductId" class="form-control  " placeholder="Cantidad">
+                                <div class="input-group-append ml-2">
+                                    <button class="btn btn-outline-secondary " id="btn-product-@p.ProductId" type="button">Agregar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            if (limit == 3 || total == total_products)
+            {
+                @Html.Raw(end_group);
+                limit = 0;
+            }
+            limit++;
+            total++;
+        }
+
+    }
+</div>
+
+<style>
+
+    .image-catalog {
+        object-fit: contain;
+        object-position: center;
+        height: 350px;
+        margin-top: 5px;
+    }
+</style>
