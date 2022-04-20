@@ -6,7 +6,7 @@
         <h3>Contáctanos</h3>
         <fieldset> <input placeholder="Nombre" name="Nombre" type="text" tabindex="1" required autofocus> </fieldset>
         <fieldset> <input placeholder="Correo electrónico" type="email" name="Email" tabindex="2" required> </fieldset>
-        <fieldset> <select id="inputType" name="FeedbackTypeId" class="form-control-2">
+        <fieldset> <select id="inputType" name="FeedbackTypeId" class="form-control-contact">
             <option selected>Tipo de consulta</option>
             <option value="1">Consulta</option>
             <option value="2">Felicitación</option>
@@ -61,11 +61,14 @@
         width: 100%
     }
 
-    .form-control-2 {
+    .form-control-contact {
+        border: 1px solid #ccc;
         border-radius: 0;
         color: gray;
         height: 45px;
-        margin-bottom: 5px
+        width: 100%;
+        margin: 0 0 5px;
+        padding: 10px
     }
 
     #contactus input[type="text"],
